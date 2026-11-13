@@ -38,6 +38,7 @@ class ToolCallAgent(ReActAgent):
 
     async def think(self) -> bool:
         """Process current state and decide next actions using tools"""
+        print("=== 进入 think ===")
         if self.next_step_prompt:
             user_msg = Message.user_message(self.next_step_prompt)
             self.messages += [user_msg]
@@ -130,6 +131,7 @@ class ToolCallAgent(ReActAgent):
 
     async def act(self) -> str:
         """Execute tool calls and handle their results"""
+        print("=== 进入 act ===")
         if not self.tool_calls:
             if self.tool_choices == ToolChoice.REQUIRED:
                 raise ValueError(TOOL_CALL_REQUIRED)
@@ -173,6 +175,7 @@ class ToolCallAgent(ReActAgent):
 
     async def execute_tool(self, command: ToolCall) -> str:
         """Execute a single tool call with robust error handling"""
+        print("=== 执行工具:", command.function.name, "===")
         if not command or not command.function or not command.function.name:
             return "Error: Invalid command format"
 

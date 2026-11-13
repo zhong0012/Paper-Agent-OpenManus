@@ -294,7 +294,10 @@ class Config:
         if daytona_config:
             daytona_settings = DaytonaSettings(**daytona_config)
         else:
-            daytona_settings = DaytonaSettings()
+            try:
+                daytona_settings = DaytonaSettings()
+            except Exception:
+                daytona_settings = None
 
         mcp_config = raw_config.get("mcp", {})
         mcp_settings = None
